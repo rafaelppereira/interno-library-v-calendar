@@ -3,6 +3,8 @@ import { createStore } from 'vuex';
 const month = new Date().getMonth();
 const year = new Date().getFullYear();
 
+import axios from 'axios';
+
 const store = createStore({
   state: {
     attributes: [
@@ -88,6 +90,7 @@ const store = createStore({
         category: 'extra',
       },
     ],
+    users: []
   },
   getters: {
 
@@ -96,9 +99,21 @@ const store = createStore({
     GET_CATEGORY(state, payload) {
       const filterCategory = state.attributes.filter((attr) => attr.category === payload);
       state.attributes = [...filterCategory];
-    }
+    },
+    // GET_USERS(state, payload) {
+    //   state.users = [];
+    //   state.users = payload;
+    // }
   },
-  actions: {}
+  actions: {
+    // async getUsers({ commit }, payload) {
+    //   // const req = await fetch('https://reqres.in/api/users?page=2');
+    //   // const users = await req.json();
+
+    //   // commit('GET_USERS', users);
+    //   console.log('oi');
+    // }
+  }
 });
 
 export default store;

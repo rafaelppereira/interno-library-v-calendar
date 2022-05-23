@@ -8,7 +8,8 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
   import Calendar from './components/Calendar.vue';
 </script>
+
 

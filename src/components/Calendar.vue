@@ -14,17 +14,18 @@
       class="bg-white max-w-full"
       :masks="masks"
       :attributes="attributes"
+      :columns="$screens({ default: 1, laptop: 1 })"
       disable-page-swipe
       is-expanded
-      :min-date="new Date()"
     >
       <template v-slot:day-content="{ day, attributes }">
-        <div class="min-h-full flex flex-col h-24 z-10 overflow-hidden border border-solid border-gray-200">
+        <div class=" min-h-full flex flex-col h-24 z-10 overflow-hidden border border-solid border-gray-200">
           <span class="day-label text-sm text-gray-900">{{ day.day }}</span>
           <div class="flex-grow overflow-y-auto overflow-x-auto p-1">
             <button
               type="button"
-              class="text-xs leading-tight rounded-xl p-[0.35rem] mt-0 mb-1"
+              class="text-xs leading-tight rounded-xl p-[0.35rem] mt-0 mb-1 hover:brightness-90 transition"
+              @click="handleRedirectUrl(attr.customData.title)"
               v-for="attr in attributes"
               :key="attr.key"
               :class="attr.customData.class"
@@ -39,25 +40,37 @@
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      masks: {
-        weekdays: 'WWW',
+  export default {
+    data() {
+      return {
+        masks: {
+          title: 'MMMM YYYY',
+          weekdays: 'WWW',
+          navMonths: 'MMM',
+          input: ['L', 'YYYY-MM-DD', 'YYYY/MM/DD'],
+          dayPopover: 'WWW, MMM D, YYYY',
+          data: ['L', 'YYYY-MM-DD', 'YYYY/MM/DD'],
+        },
+      };
+    },
+    computed: {
+      attributes() {
+        return this.$store.state.attributes;
+      }
+    },
+    methods: {
+      handleFilterByCategory(category) {  
+        this.$store.commit('GET_CATEGORY', category);
       },
-    };
-  },
-  computed: {
-    attributes() {
-      return this.$store.state.attributes;
-    }
-  },
-  methods: {
-    handleFilterByCategory(category) {  
-      this.$store.commit('GET_CATEGORY', category);
-    }
-  }
-};
+      handleRedirectUrl(url) {
+        const urlFormatted = url.toString().toLowerCase().split(' ').join('-');
+        window.location.href = `https://app.rafaelpereira.dev/tasks/${urlFormatted}`
+      }
+    },
+    // mounted() {
+    //   this.$store.dispach('getUsers');
+    // }
+  };
 </script>
 
 <style lang="postcss" scoped>

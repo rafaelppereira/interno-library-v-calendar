@@ -9,6 +9,12 @@ import 'v-calendar/dist/style.css';
 import './styles/index.css';
 
 createApp(App)
-.use(VCalendar)
+.use(VCalendar, {
+  screens: {
+    tablet: '576px',
+    laptop: '992px',
+    desktop: '1200px',
+  },
+})
 .use(store)
 .mount('#app')
