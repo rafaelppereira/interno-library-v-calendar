@@ -16,19 +16,21 @@
       :attributes="attributes"
       disable-page-swipe
       is-expanded
+      :min-date="new Date()"
     >
       <template v-slot:day-content="{ day, attributes }">
         <div class="min-h-full flex flex-col h-24 z-10 overflow-hidden border border-solid border-gray-200">
           <span class="day-label text-sm text-gray-900">{{ day.day }}</span>
           <div class="flex-grow overflow-y-auto overflow-x-auto p-1">
-            <p
+            <button
+              type="button"
+              class="text-xs leading-tight rounded-xl p-[0.35rem] mt-0 mb-1"
               v-for="attr in attributes"
               :key="attr.key"
               :class="attr.customData.class"
-              class="text-xs leading-tight rounded-xl p-[0.35rem] mt-0 mb-1"
             >
               {{ attr.customData.title }}
-            </p>
+            </button>
           </div>
         </div>
       </template>
