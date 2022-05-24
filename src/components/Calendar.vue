@@ -58,6 +58,9 @@
         return this.$store.state.attributes;
       }
     },
+    mounted() {
+      this.$store.dispatch('getUsers', 'rafaelppereira');
+    },
     methods: {
       handleFilterByCategory(category) {  
         this.$store.commit('GET_CATEGORY', category);
@@ -65,11 +68,8 @@
       handleRedirectUrl(url) {
         const urlFormatted = url.toString().toLowerCase().split(' ').join('-');
         window.location.href = `https://app.rafaelpereira.dev/tasks/${urlFormatted}`
-      }
+      },
     },
-    // mounted() {
-    //   this.$store.dispach('getUsers');
-    // }
   };
 </script>
 

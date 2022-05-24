@@ -100,19 +100,21 @@ const store = createStore({
       const filterCategory = state.attributes.filter((attr) => attr.category === payload);
       state.attributes = [...filterCategory];
     },
-    // GET_USERS(state, payload) {
-    //   state.users = [];
-    //   state.users = payload;
-    // }
+    GET_USERS(state, payload) {
+      state.users = payload;
+    }
   },
   actions: {
-    // async getUsers({ commit }, payload) {
-    //   // const req = await fetch('https://reqres.in/api/users?page=2');
-    //   // const users = await req.json();
-
-    //   // commit('GET_USERS', users);
-    //   console.log('oi');
-    // }
+    getUsers({ commit  }, payload) {
+      axios
+        .get(`https://api.github.com/users/${payload}`)
+        .then((res) => {
+          commit(res.data, payload);
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+    }
   }
 });
 
