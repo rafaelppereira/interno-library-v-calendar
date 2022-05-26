@@ -6,7 +6,7 @@
     {{ user.name }}! você tem sala(s) disponíveis.
   </p>
 
-  <select class="mb-12 h-8 px-2 text-gray-500 rounded-lg" v-model="unity">
+  <select class="mb-12 h-8 px-2 text-gray-500 rounded-lg w-[360px]" v-model="unity">
     <option value="" disabled selected>Selecione uma unidade</option>
     <option value="RJ">Rio de janeiro</option>
     <option value="SP">São Paulo</option>

@@ -2,10 +2,11 @@
   <div class="text-center section flex flex-col items-center">
     <span
       v-for="attr in attributes"
-      :key="attr"
+      :key="attr[0]?.key"
     >
-      {{ attr.customData.title }}
+      {{ attr }}   
     </span>
+    
     <Title />
     <Loading 
       v-if="isLoading === true"
@@ -17,36 +18,35 @@
         class="bg-white max-w-full w-full"
         disable-page-swipe
         is-expanded
+        v-model="attributes"
       >
         <template v-slot:day-content="{ day, attributes }">
           <div class="min-h-full flex flex-col h-24 z-10 overflow-hidden border border-solid border-gray-200">
             <span class="day-label text-sm text-gray-900">{{ day.day }}</span>
 
             <!-- Administrador -->
-            <button v-if="user.office === 'administrador'" @click="handleOpenTableContentData(attributes)" class="flex-grow overflow-y-auto overflow-x-auto p-1 hover:bg-sky-700 transition-colors cursor-pointer focus:bg-sky-700" >
-              <!-- <span
+            <button v-if="user.office === 'administrador'" @click="handleOpenTableContentData(attributes)" class="flex-grow overflow-y-auto overflow-x-auto p-1 " >
+              <span
                 type="button"
-                class="bg-teal-500 justify-center text-xs leading-tight rounded-full p-[0.5rem] m-2 flex"
+                class="text-white bg-teal-500 justify-center text-xs leading-tight rounded-full p-[0.5rem] m-2 flex"
                 v-show="user.office === 'administrador'"
                 v-for="attr in attributes"
-                :key="attr.key"
-                :class="attr.customData.class"
+                :key="attr?.key"
               >
-                {{ attr.name }}
-              </span> -->
+                {{ attr[0]?.customData?.title }}
+              </span>
 
             </button>
 
             <!-- Usuário -->
             <div v-else class="relative flex-grow overflow-y-auto overflow-x-auto p-1 admCommand">
               <span
-                v-for="attr in attributes['results']" 
-                :key="attr.key"
-                :class="attr.customData.class"
-                v-show="user.office != 'administrador' && attr.customData.userId === user.id" 
-                class="bg-teal-500 justify-center text-xs leading-tight rounded-full p-[0.5rem] m-2 flex"
+                v-for="attr in attributes" 
+                :key="attr?.key"
+                v-show="user.office != 'administrador' && attr[0]?.customData?.userId === user.id" 
+                class="bg-teal-500 text-white justify-center text-xs leading-tight rounded-full p-[0.5rem] m-2 flex"
               >
-                {{ attr.customData.title }}
+                {{ attr[0]?.customData?.title }}
               </span>
               <button class="absolute inset-0 bg-sky-700 rounded-full text-white">
                 Reservar agora
@@ -95,7 +95,7 @@
       setTimeout(() => {
         this.$store.dispatch('getAttributes', 'units');
         this.$store.dispatch('getUsers', 'users');
-      }, 5000)
+      }, 100)
     },
     methods: {
       handleOpenTableContentData(id) {
@@ -111,24 +111,5 @@
   }
   ::-webkit-scrollbar-track {
     display: none;
-  }
-
-  .admCommand button {
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.2s;
-  }
-
-  .admCommand:hover span {
-    opacity: 0;
-    visibility: hidden;
-
-    transition: all 0.2s;
-  }
-
-  .admCommand:hover button {
-    opacity: 1;
-    visibility: visible;
-  }
-  
+  }  
 </style>
