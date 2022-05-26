@@ -2,7 +2,7 @@
   <h2 class="text-3xl text-white">Calendário customizado</h2>
   <div v-if="isLoading" class="mb-12 mt-3 rounded-full bg-slate-700 h-3 w-[200px] animate-pulse"></div>
 
-  <p class="text-lg font-regular text-gray-200 mb-8" v-else>
+  <p v-show="user.office === 'administrador'" class="text-lg font-regular text-gray-200 mb-8" v-else>
     {{ user.name }}! você tem sala(s) disponíveis.
   </p>
 

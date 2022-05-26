@@ -14,9 +14,8 @@ const store = createStore({
   mutations: {
     GET_ATTRIBUTES(state, payload) {    
       state.attributes = payload;
-      
       const findUnity = state.attributes.filter((attr) => attr['name'] === state.unity);
-      const findResults = findUnity.map(item => item['results']);
+      const [findResults] = findUnity.map(item => item['results']);
 
       state.attributes = findResults;
     },
