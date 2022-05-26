@@ -1,0 +1,33 @@
+{
+  "users": {
+    "id": "1e87d5c9-25cb-426f-b508-d8db7d49ca8f",
+    "name": "Rafael Pereira",
+    "email": "rafaelsantospereira03@gmail.com",
+    "password": "a607d6b2accd557f9e3f79f210bf66e5",
+    "office": "administrador"
+  },
+
+  "units": [
+    {
+      "name": "RJ",
+      "results": [
+        {
+          "key": 1,
+          "customData": {
+            "title": "Sala livre",
+            "class": "bg-teal-500 text-white",
+            "userId": "1e87d5c9-25cb-426f-b508-d8db7d49ca8f",
+            "username": "Rafael Pereira",
+            "category": "extra"
+          },
+          "dates": "Sun May 01 2022 00:00:00 GMT-0300 (Horário Padrão de Brasília)"
+        }
+      ]
+    },
+    {
+      "name": "SP",
+      "results": []
+    }
+  ]
+  
+}
